@@ -43,7 +43,10 @@ module.exports = class Jeffuscator
             this.files = [path]
         } else {
             dirWalk(path).forEach((file) => {
-                if(mime.lookup(file) === 'application/javascript') {
+                if(
+                    mime.lookup(file) === 'application/javascript'
+                    && !/jeff.js$/.test(file)
+                ) {
                     this.files.push(file)
                 }
             })

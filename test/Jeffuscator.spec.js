@@ -113,6 +113,21 @@ describe('Jeffuscator', () => {
             })
         })
 
+        it('does not process `.jeff.js` files', () => {
+            new Jeffuscator(path.resolve(__dirname, 'fixtures/multipleJsFiles')).processFiles()
+            new Jeffuscator(path.resolve(__dirname, 'fixtures/multipleJsFiles')).processFiles()
+
+            let jsPaths = [
+                path.resolve(__dirname, 'fixtures/multipleJsFiles/js1.jeff.jeff.js'),
+                path.resolve(__dirname, 'fixtures/multipleJsFiles/js.2.jeff.jeff.js'),
+                path.resolve(__dirname, 'fixtures/multipleJsFiles/subDirectory/js3.jeff.jeff.js')
+            ]
+
+            jsPaths.forEach((jsPath) => {
+                expect(fs.existsSync(jsPath)).to.equal(false)
+            })
+        })
+
         it('saves processed files with the same structure to an output directory when provided', () => {
             let outputPath = path.resolve(__dirname, 'output')
 

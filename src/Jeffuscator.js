@@ -1,5 +1,5 @@
 const mime = require('mime-types');
-const fs = require('fs');
+const fs = require('fs-extra');
 const { dirWalk, getLowestCommonDirectory, insertAtStrPos } = require('./helpers')
 
 /**
@@ -76,7 +76,7 @@ module.exports = class Jeffuscator
 
             let fileText = fs.readFileSync(file, 'utf8')
 
-            fs.writeFileSync(
+            fs.outputFileSync(
                 filename,
                 fileText
             )

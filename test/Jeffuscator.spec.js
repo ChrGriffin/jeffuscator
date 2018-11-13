@@ -1,19 +1,34 @@
 const { expect } = require('chai')
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const Jeffuscator = require('../src/Jeffuscator')
 const { dirWalk } = require('../src/helpers')
 
 describe('Jeffuscator', () => {
 
+    /**
+     * Perform setup before each test.
+     *
+     * @return { void }
+     */
     beforeEach(function() {
         removeTestFiles()
     })
 
+    /**
+     * Perform teardown after each test.
+     *
+     * @return { void }
+     */
     afterEach(function() {
         removeTestFiles()
     });
 
+    /**
+     * Tests related to class instantiation.
+     *
+     * @return { void }
+     */
     describe('Instantiation & Setup', () => {
         it('is referencable', () => {
             expect(Jeffuscator).to.exist
@@ -26,6 +41,11 @@ describe('Jeffuscator', () => {
         })
     })
 
+    /**
+     * Tests related to loading and verifying files.
+     *
+     * @return { void }
+     */
     describe('File Loading', () => {
         it('throws an exception when the given directory or file does not exist', () => {
             expect(() => {
@@ -73,6 +93,11 @@ describe('Jeffuscator', () => {
         })
     })
 
+    /**
+     * Tests related to processing and saving files.
+     *
+     * @return { void }
+     */
     describe('File Processing', () => {
         it('saves processed files next to the originals when no output directory is provided', () => {
             new Jeffuscator(path.resolve(__dirname, 'fixtures/multipleJsFiles')).processFiles()
@@ -81,6 +106,23 @@ describe('Jeffuscator', () => {
                 path.resolve(__dirname, 'fixtures/multipleJsFiles/js1.jeff.js'),
                 path.resolve(__dirname, 'fixtures/multipleJsFiles/js.2.jeff.js'),
                 path.resolve(__dirname, 'fixtures/multipleJsFiles/subDirectory/js3.jeff.js')
+            ]
+
+            jsPaths.forEach((jsPath) => {
+                expect(fs.existsSync(jsPath)).to.equal(true)
+            })
+        })
+
+        it('saves processed files with the same structure to an output directory when provided', () => {
+            let outputPath = path.resolve(__dirname, 'output')
+
+            new Jeffuscator(path.resolve(__dirname, 'fixtures/multipleJsFiles'))
+                .processFiles(outputPath)
+
+            let jsPaths = [
+                outputPath + '/js1.jeff.js',
+                outputPath + '/js.2.jeff.js',
+                outputPath + '/subDirectory/js3.jeff.js'
             ]
 
             jsPaths.forEach((jsPath) => {
@@ -102,4 +144,8 @@ let removeTestFiles = function() {
             fs.unlinkSync(file)
         }
     })
+
+    if(fs.existsSync(path.resolve(__dirname, 'output'))) {
+        fs.removeSync(path.resolve(__dirname, 'output'))
+    }
 }

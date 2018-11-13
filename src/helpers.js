@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 
 /**
  * Recursively get all files in a directory.

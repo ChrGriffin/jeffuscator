@@ -1,5 +1,6 @@
 const mime = require('mime-types');
 const fs = require('fs');
+const { dirWalk, getLowestCommonDirectory, insertAtStrPos } = require('./helpers')
 
 /**
  * @property { string } files
@@ -50,25 +51,35 @@ module.exports = class Jeffuscator
             // should an error be thrown if there are no valid files?
         }
     }
-}
 
-/**
- * Recursively get all files in a directory.
- *
- * @param { string } dir
- * @param { array } filelist
- * @returns { array }
- */
-let dirWalk = function(dir, filelist) {
-    let files = fs.readdirSync(dir);
-    filelist = filelist || [];
-    files.forEach(function(file) {
-        if (fs.statSync(dir + '/' + file).isDirectory()) {
-            filelist = dirWalk(dir + '/' + file, filelist);
+    /**
+     * Process and save all configured files.
+     *
+     * @param { string } outputDir
+     */
+    processFiles(outputDir) {
+
+        if(this.files.length < 1) {
+            return
         }
-        else {
-            filelist.push(dir + '/' + file);
-        }
-    });
-    return filelist;
-};
+
+        this.files.forEach((file) => {
+
+            let filename = insertAtStrPos(file, '.jeff', file.lastIndexOf('.js'));
+
+            if(typeof outputDir !== 'undefined') {
+                filename = filename.replace(
+                    getLowestCommonDirectory(this.files),
+                    outputDir.replace(/\/?$/, '/')
+                )
+            }
+
+            let fileText = fs.readFileSync(file, 'utf8')
+
+            fs.writeFileSync(
+                filename,
+                fileText
+            )
+        })
+    }
+}

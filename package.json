@@ -1,0 +1,29 @@
+{
+  "name": "jeffuscator",
+  "version": "0.0.1",
+  "description": "Obfuscate JavaScript by renaming all variables and methods to different variations of 'Jeff'.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrGriffin/jeffuscator.git"
+  },
+  "keywords": [
+    "obfuscator",
+    "obfuscate",
+    "obfuscation",
+    "js",
+    "javascript",
+    "elon",
+    "musk",
+    "evil"
+  ],
+  "author": "Christian Griffin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ChrGriffin/jeffuscator/issues"
+  },
+  "homepage": "https://github.com/ChrGriffin/jeffuscator#readme"
+}

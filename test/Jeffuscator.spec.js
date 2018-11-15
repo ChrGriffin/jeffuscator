@@ -145,15 +145,85 @@ describe('Jeffuscator', () => {
             })
         })
     })
+
+    /**
+     * Tests related to obfuscating files.
+     *
+     * @return { void }
+     */
+    describe('Obfuscation', () => {
+
+        it('replaces normal function declarations with Jeffs', () => {
+
+            expectJeffReplacements(
+                path.resolve(__dirname, 'fixtures/functionTests/functionDeclaration.js'),
+                path.resolve(__dirname, 'fixtures/functionTests/functionDeclaration.jeff.js'),
+                2
+            )
+        })
+
+        it('replaces functions stored in variables with Jeffs', () => {
+
+            expectJeffReplacements(
+                path.resolve(__dirname, 'fixtures/functionTests/functionAsVariable.js'),
+                path.resolve(__dirname, 'fixtures/functionTests/functionAsVariable.jeff.js'),
+                2
+            )
+        })
+
+        it('replaces single variables with Jeffs', () => {
+
+            expectJeffReplacements(
+                path.resolve(__dirname, 'fixtures/variableTests/singleVariables.js'),
+                path.resolve(__dirname, 'fixtures/variableTests/singleVariables.jeff.js'),
+                2
+            )
+        })
+
+        it('replaces comma-separated variables with Jeffs', () => {
+
+            expectJeffReplacements(
+                path.resolve(__dirname, 'fixtures/variableTests/commaSeparatedVariables.js'),
+                path.resolve(__dirname, 'fixtures/variableTests/commaSeparatedVariables.jeff.js'),
+                3
+            )
+        })
+    })
 })
+
+/**
+ * Expect that we refactor all function references in a given file to be instances of 'Jeff'.
+ *
+ * @param { string } sourcePath
+ * @param { string } processedPath
+ * @param { int } numFunctions
+ */
+let expectJeffReplacements = function(sourcePath, processedPath, numFunctions)
+{
+    let fileText = fs.readFileSync(sourcePath, 'utf8')
+
+    for(let f = 1; f <= numFunctions; f++) {
+        expect(new RegExp('shouldBeReplaced' + f).test(fileText)).to.equal(true)
+    }
+
+    new Jeffuscator(sourcePath)
+        .processFiles()
+
+    fileText = fs.readFileSync(processedPath, 'utf8')
+
+    for(let f = 1; f <= numFunctions; f++) {
+        expect(new RegExp('shouldBeReplaced' + f).test(fileText)).to.equal(false)
+    }
+}
 
 /**
  * Remove any files created by testing.
  *
  * @return { void }
  */
-let removeTestFiles = function() {
-    let files = dirWalk(path.resolve(__dirname, 'fixtures/multipleJsFiles'))
+let removeTestFiles = function()
+{
+    let files = dirWalk(path.resolve(__dirname, 'fixtures'))
     files.forEach((file) => {
         if(file.indexOf('.jeff.js') !== -1) {
             fs.unlinkSync(file)

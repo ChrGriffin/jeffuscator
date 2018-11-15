@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const Jeffuscator = require('../src/Jeffuscator')
 const { dirWalk } = require('../src/helpers')
+const { exec } = require('child_process');
 
 describe('Jeffuscator', () => {
 
@@ -209,6 +210,46 @@ describe('Jeffuscator', () => {
             }).to.not.throw()
 
             expect(processedJavascriptFunction.getMyValue()).to.equal(1)
+        })
+    })
+
+    /**
+     * Tests related to the CLI functionality.
+     *
+     * @return { void }
+     */
+    describe('CLI Functionality', () => {
+
+        const cliPath = path.resolve(__dirname, '../cli.js')
+        const inputPath = path.resolve(__dirname, './fixtures/multipleJsFiles/js1.js')
+        const outputPathNoOutput = path.resolve(__dirname, './fixtures/multipleJsFiles/js1.jeff.js')
+        const outputDirectoryPath = path.resolve(__dirname, './fixtures/multipleJsFiles')
+        const outputFilePath = path.resolve(__dirname, './fixtures/multipleJsFiles/js1.jeff')
+
+        it('exits with an error code when no input is specified', () => {
+
+            exec(`node ${cliPath}`, (err, stdout, stderr) => {
+
+                expect(err).to.not.equal(null)
+            });
+        })
+
+        it('saves processed file next to original when provided an input and no output', () => {
+
+            exec(`node ${cliPath} -i ${inputPath}`, (err, stdout, stderr) => {
+
+                expect(err).to.equal(null)
+                expect(fs.existsSync(outputPathNoOutput)).to.equal(true)
+            });
+        })
+
+        it('saves processed file in the output directory when provided an input and an output', () => {
+
+            exec(`node ${cliPath} -i ${inputPath} -o ${outputDirectoryPath}`, (err, stdout, stderr) => {
+
+                expect(err).to.equal(null)
+                expect(fs.existsSync(outputPathFilet)).to.equal(true)
+            });
         })
     })
 })

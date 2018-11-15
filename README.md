@@ -38,3 +38,7 @@ Once installed, you should be able to use Jeffuscator from the command line usin
 ```
 jeffuscate -i path/to/my/input -o path/to/my/output
 ```
+
+## Under the Hood
+
+Jeffuscator makes use of a custom fork of [UglifyJs v1](https://github.com/mishoo/UglifyJS) that switches out the normal string of characters used for obfuscation, with an array of different variations of the name Jeff.

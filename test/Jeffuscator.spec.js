@@ -188,6 +188,28 @@ describe('Jeffuscator', () => {
                 3
             )
         })
+
+        it('obfuscates a valid file into a valid file', () => {
+
+            var validJavascriptFunction = require(path.resolve(__dirname, 'fixtures/validJavascript.js'))
+
+            expect(() => {
+                validJavascriptFunction.getMyValue()
+            }).to.not.throw()
+
+            expect(validJavascriptFunction.getMyValue()).to.equal(1)
+
+            new Jeffuscator(path.resolve(__dirname, 'fixtures/validJavascript.js'))
+                .processFiles()
+
+            var processedJavascriptFunction = require(path.resolve(__dirname, 'fixtures/validJavascript.jeff.js'))
+
+            expect(() => {
+                processedJavascriptFunction.getMyValue()
+            }).to.not.throw()
+
+            expect(processedJavascriptFunction.getMyValue()).to.equal(1)
+        })
     })
 })
 

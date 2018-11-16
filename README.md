@@ -1,6 +1,36 @@
 # Jeffuscator
 Obfuscate JavaScript by renaming all variables and methods to different variations of 'Jeff'. Inspired by [this tweet](https://twitter.com/MrEvilMusk/status/1061856821005205504) from Evil Elon Musk.
 
+## Example
+
+### Before:
+
+```javascript
+var firstNum = 1;
+var secondNum = 2;
+
+var added = add(firstNum, secondNum);
+
+function add(a, b)
+{
+    return a + b;
+}
+```
+
+### After:
+
+```javascript
+var jeff = 1;
+var jeffrey = 2;
+
+var jefferey = jeffeory(jeff, jeffrey);
+
+function jeffeory(jeffy, jefrey)
+{
+    return jeffy + jefrey;
+}
+```
+
 ## Installation
  
 Install Jeffuscator with NPM:

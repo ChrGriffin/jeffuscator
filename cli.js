@@ -15,10 +15,10 @@ program
         }
 
         if(program.outputPath) {
-            var output = program.outputPath
+            var output = path.join(__dirname, program.outputPath)
         }
 
-        new Jeffuscator(program.inputPath)
+        new Jeffuscator(path.join(__dirname, program.inputPath))
             .processFiles(output)
     })
     .parse(process.argv)

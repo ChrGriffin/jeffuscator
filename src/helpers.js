@@ -29,7 +29,14 @@ let dirWalk = function(dir, filelist) {
  */
 let getLowestCommonDirectory = function(files) {
     if(files.length < 2) {
-        return files[0].substr(files[0].lastIndexOf('/') || 0)
+
+        let pattern = /[\/\\]/g
+        let lastIndex = 0
+        while(pattern.test(files[0]) === true) {
+            lastIndex = pattern.lastIndex
+        }
+
+        return files[0].substr(0, lastIndex)
     }
     else {
         let intersection = null

@@ -14,9 +14,9 @@ program
             process.exit(1)
         }
 
-        if(program.outputPath) {
-            var output = path.join(process.cwd(), program.outputPath)
-        }
+        var output = program.outputPath
+            ? path.join(process.cwd(), program.outputPath)
+            : null
 
         new Jeffuscator(path.join(process.cwd(), program.inputPath))
             .processFiles(output)

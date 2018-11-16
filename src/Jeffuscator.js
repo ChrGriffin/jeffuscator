@@ -106,7 +106,7 @@ module.exports = class Jeffuscator
     {
         let filename = insertAtStrPos(file, '.jeff', file.lastIndexOf('.js'));
 
-        if(typeof outputDir !== 'undefined') {
+        if(outputDir) {
             filename = filename.replace(
                 getLowestCommonDirectory(this.files),
                 outputDir.replace(/\/?$/, '/')

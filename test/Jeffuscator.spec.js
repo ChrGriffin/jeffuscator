@@ -83,11 +83,13 @@ describe('Jeffuscator', () => {
             expect(jeff.files.length).to.equal(3)
 
             let jsPaths = [
-                path.resolve(__dirname, 'fixtures/multipleJsFiles/js1.js'),
-                path.resolve(__dirname, 'fixtures/multipleJsFiles/js.2.js'),
-                path.resolve(__dirname, 'fixtures/multipleJsFiles/subDirectory/js3.js')
+                path.join(__dirname, 'fixtures/multipleJsFiles/js1.js'),
+                path.join(__dirname, 'fixtures/multipleJsFiles/js.2.js'),
+                path.join(__dirname, 'fixtures/multipleJsFiles/subDirectory/js3.js')
             ]
 
+            console.log(jsPaths)
+            console.log(jeff.files)
             jsPaths.forEach((jsPath) => {
                 expect(jeff.files.indexOf(jsPath)).to.not.equal(-1)
             })
@@ -289,7 +291,7 @@ let removeTestFiles = function()
     let files = dirWalk(path.resolve(__dirname, 'fixtures'))
     files.forEach((file) => {
         if(file.indexOf('.jeff.js') !== -1) {
-            fs.unlinkSync(file)
+            //fs.unlinkSync(file)
         }
     })
 

@@ -1,6 +1,6 @@
 {
   "name": "jeffuscator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Obfuscate JavaScript by renaming all variables and methods to different variations of 'Jeff'.",
   "main": "src/Jeffuscator.js",
   "scripts": {

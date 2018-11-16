@@ -14,13 +14,11 @@ program
             process.exit(1)
         }
 
-        console.log(program.inputPath)
-
         if(program.outputPath) {
-            var output = path.resolve(__dirname, program.outputPath)
+            var output = program.outputPath
         }
 
-        new Jeffuscator(path.resolve(__dirname, program.inputPath))
+        new Jeffuscator(program.inputPath)
             .processFiles(output)
     })
     .parse(process.argv)

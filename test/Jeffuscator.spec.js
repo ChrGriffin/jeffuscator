@@ -88,8 +88,6 @@ describe('Jeffuscator', () => {
                 path.join(__dirname, 'fixtures/multipleJsFiles/subDirectory/js3.js')
             ]
 
-            console.log(jsPaths)
-            console.log(jeff.files)
             jsPaths.forEach((jsPath) => {
                 expect(jeff.files.indexOf(jsPath)).to.not.equal(-1)
             })

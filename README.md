@@ -1,5 +1,7 @@
 <p align="center">
-<a href="https://app.codeship.com/projects/316591"><img src="https://app.codeship.com/projects/1aad47d0-d489-0136-cd9c-3652e4ceaffd/status?branch=master" alt="Build Status"></a>
+<img src="https://app.codeship.com/projects/1aad47d0-d489-0136-cd9c-3652e4ceaffd/status?branch=master" alt="Build Status">
+<img src="https://img.shields.io/github/license/chrgriffin/jeffuscator.svg" alt="License">
+<img src="https://img.shields.io/npm/v/jeffuscator.svg" alt="NPM Version">
 </p>
 
 # Jeffuscator

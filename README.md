@@ -1,3 +1,7 @@
+<p align="center">
+<a href="https://app.codeship.com/projects/316591"><img src="https://app.codeship.com/projects/1aad47d0-d489-0136-cd9c-3652e4ceaffd/status?branch=master" alt="Build Status"></a>
+</p>
+
 # Jeffuscator
 Obfuscate JavaScript by renaming all variables and methods to different variations of 'Jeff'. Inspired by [this tweet](https://twitter.com/MrEvilMusk/status/1061856821005205504) from Evil Elon Musk.
 

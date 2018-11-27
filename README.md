@@ -1,5 +1,6 @@
 <p align="center">
 <img src="https://app.codeship.com/projects/1aad47d0-d489-0136-cd9c-3652e4ceaffd/status?branch=master" alt="Build Status">
+<img src='https://coveralls.io/repos/github/ChrGriffin/jeffuscator/badge.svg?branch=master' alt='Coverage Status' />
 <img src="https://img.shields.io/github/license/chrgriffin/jeffuscator.svg" alt="License">
 <img src="https://img.shields.io/npm/v/jeffuscator.svg" alt="NPM Version">
 </p>

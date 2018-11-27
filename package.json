@@ -4,7 +4,8 @@
   "description": "Obfuscate JavaScript by renaming all variables and methods to different variations of 'Jeff'.",
   "main": "src/Jeffuscator.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha",
+    "test-report-coverage": "npm test && nyc report --reporter lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "bin": {
     "jeffuscate": "./cli.js"
@@ -34,6 +35,8 @@
   "homepage": "https://github.com/ChrGriffin/jeffuscator#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "istanbul": "^0.4.5",
     "mocha": "^5.2.0"
   },
   "dependencies": {
